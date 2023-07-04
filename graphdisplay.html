@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.plot.ly/plotly-2.16.1.min.js'></script>
+</head>
+<body>
+    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+    
+</body>
+<script src='https://cdn.plot.ly/plotly-2.16.1.min.js'></script>
+<script>
+    stringURL = window.location.href;
+    countryName = stringURL.split("=")[1]
+    console.log(countryName)
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '1b8a4beb2fmshd3e971fd2d38992p1a6387jsncc7c33026ba5',
+            'X-RapidAPI-Host': 'covid-193.p.rapidapi.com'
+        }
+    };
+    var result;
+    
+    fetch('https://covid-193.p.rapidapi.com/statistics', options)
+        .then(response => response.json())
+        .then(response => {
+            result = response.response.filter(item=>
+                item.country === countryName
+            )[0];
+            console.log(result)
+        
+            var trace1 = {
+            x: [1, 2, 3, 4],
+            y: [result.deaths["1M_POP"],result.deaths.total],
+            type: hello
+            
+          };
+          console.log("kya aaya " , result)
+          var trace2 = {
+            x: [1, 2, 3, 4],
+            y: [result.deaths["1M_POP"]],
+            type: 'scatter'
+          };
+          
+          var data = [trace1, trace2];
+          
+          Plotly.newPlot('myDiv', data);
+        })
+        .catch(err => console.error(err));
+
+        
+          
+        
+</script>
+</html>

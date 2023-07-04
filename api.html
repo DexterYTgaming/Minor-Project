@@ -1,0 +1,17 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<script>
+    $( document ).ready(function() {
+        let endpoint = 'https://api.apify.com/v2/key-value-stores/tVaYRsPHLjNdNBu7S/records/LATEST?disableRedirect=true'
+        //let apiKey = '5b578yg9yvi8sogirbvegoiufg9v9g579gviuiub8'
+          $.ajax({
+              url: endpoint,
+              contentType: "application/json",
+              dataType: 'json',
+              success: function(result){
+                  console.log(result);
+              }
+          });
+      });
+</script>

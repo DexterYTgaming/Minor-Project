@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-exports.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/css/anychart-ui.min.css">
+    <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/fonts/css/anychart-font.min.css">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/colorbrewer.v1.min.js"></script>
+  <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Minor Project</title>
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+
+  </head>
+
+  <body>
+
+    <header class="header" id="header">
+      <div class="header_toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="./map.html" class="nav_logo ul-remove">
+            <i class="bx bx-map nav_logo-icon"></i>
+            <span class="nav_logo-name">Map Visualizer</span>
+          </a>
+          <div class="nav_list">
+            <a href="./index.html" class="nav_link">
+              <i class="bx bx-grid-alt nav_icon"></i
+              ><span class="nav_name">Dashboard</span>
+            </a>
+            <a href="./login.html" class="nav_link">
+              <i class="bx bx-user nav_icon"></i
+              ><span class="nav_name">Users</span>
+            </a>
+            <a href="./continent.html" class="nav_link">
+              <i class="bx bx-map-alt nav_icon"></i>
+              <span class="nav_name">Continent</span>
+            </a>
+            <a href="./country.html" class="nav_link">
+              <i class="bx bx-world nav_icon"></i>
+              <span class="nav_name">Country</span>
+            </a>
+            <a href="./java/amchart.html" class="nav_link"
+              ><i class="bx bxs-virus nav_icon"></i
+              ><span class="nav_name">Covid Cases</span>
+            </a>
+            <a href="./crime.html" class="nav_link  active">
+              <i class="bx bx-knife nav_icon"></i>
+              <span class="nav_name">Crime Rates</span>
+            </a>
+            <!-- <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->
+          </div>
+        </div>
+        <div class="bot-row">
+          <a href="#" class="nav_link ul-remove">
+            <i class="bx bx-log-out nav_icon"></i>
+            <span class="nav_name">SignOut</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+    
+    <main role="main">
+
+      <section class="jumbotron text-center main-background text-white">
+        <div class="container">
+          <h1 class="jumbotron-heading">Crime Rate</h1>
+          <p class="lead">Rate is the number of Reported Offenses per 100,000 Population</p>
+          <div class="row justify-content-center">
+              <div class="col-md-3">
+                  <a href="./crime.html" class="btn btn-danger btn-block my-2">Property</a>
+              </div>
+              <div class="col-md-3">
+                  <a href="./violent.html" class="btn btn-outline-danger btn-block my-2 text-white">Violent</a>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="album py-3 bg-light">
+        <div class="container">
+
+          <div class="row align-items-center">
+              <div class="col-md-12 text-center text-dark">
+                  <h5 class="lead">
+                      # of Reported Offenses per 100,000 Population
+                  </h5>
+              </div>
+
+                <div class="col-md-5 text-left">
+                    <div class="my-4" id="containerSlider">
+                        <h2 for="slider" class="lead">
+                            Year: <span id="slider-value">…</span>
+                        </h2>
+
+                        <p>
+                            <input type="range" min="1960" max="2012" id="slider" class="slider">
+                        </p>
+                        <br>
+                        <br>
+                        <div class="container text-center">
+                            <h4 id="state_label">...</h4>
+                            <hr class="my-4">
+                            <p class="lead">
+                                <span id="offenses_label" class="text-danger">...</span> offenses
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="my-4" id="containerMap" style="height:23em;"></div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="my-4" id="containerLine" style="height:20em;"></div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="my-4" id="containerBar" style="height:20em;"></div>
+                </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="code/mapRate.js" crime_type="Property" defaultYear="1960"></script>
+    <script type="text/javascript" src="code/lineRate.js" crime_type="Property" defaultYear="1960"></script>
+    <script type="text/javascript" src="code/barRate.js" crime_type="Property" defaultYear="1960"></script>
+    <script type="text/javascript" src="code/scrollToTop.js"></script>
+
+  </body>
+</html>

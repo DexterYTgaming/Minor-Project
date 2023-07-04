@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous" />
+    <link
+      rel="stylesheet"3
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+      crossorigin="anonymous"
+    />
+    <script src="./java/myscript.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body id="body-pd">
+    <header class="header" id="header">
+      <div class="header_toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="./map.html" class="nav_logo ul-remove">
+            <i class="bx bx-map nav_logo-icon"></i>
+            <span class="nav_logo-name">Map Visualizer</span>
+          </a>
+          <div class="nav_list">
+            <a href="./index.html" class="nav_link active">
+              <i class="bx bx-grid-alt nav_icon"></i
+              ><span class="nav_name">Dashboard</span>
+            </a>
+            <a href="./login.html" class="nav_link">
+              <i class="bx bx-user nav_icon"></i
+              ><span class="nav_name">Users</span>
+            </a>
+            <a href="./continent.html" class="nav_link">
+              <i class="bx bx-map-alt nav_icon"></i>
+              <span class="nav_name">Continent</span>
+            </a>
+            <a href="./country.html" class="nav_link">
+              <i class="bx bx-world nav_icon"></i>
+              <span class="nav_name">Country</span>
+            </a>
+            <a href="./covid19.html" class="nav_link"
+              ><i class="bx bxs-virus nav_icon"></i
+              ><span class="nav_name">Covid Cases</span>
+            </a>
+            <a href="./crime.html" class="nav_link">
+              <i class="bx bx-knife nav_icon"></i>
+              <span class="nav_name">Crime Rates</span>
+            </a>
+            <!-- <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->
+          </div>
+        </div>
+        <div class="bot-row">
+          <a href="#" class="nav_link ul-remove">
+            <i class="bx bx-log-out nav_icon"></i>
+            <span class="nav_name">SignOut</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+    <!--Container Main start-->
+    <div class="bg-light top-nav">
+      <h4>Main Components</h4>
+    </div>
+    <!--Container Main end-->
+
+    <section class="dashboard_heading">
+      <div class="container">
+        <div class="row">
+          <div class="ind_heading">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+    <!-- Chart code -->
+
+    <section style="margin: 50px">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6">
+            <div id="chartdiv1"></div>
+          </div>
+          <div class="col-6">
+            <div id="chartdiv2"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div id="chartdiv4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./java/myscript.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.jsdelivr.netnpm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/vendors/jquery.min.js"></script>
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function (event) {
+        const showNavbar = (toggleId, navId, bodyId, headerId) => {
+          const toggle = document.getElementById(toggleId),
+            nav = document.getElementById(navId),
+            bodypd = document.getElementById(bodyId),
+            headerpd = document.getElementById(headerId);
+
+          // Validate that all variables exist
+          if (toggle && nav && bodypd && headerpd) {
+            toggle.addEventListener("click", () => {
+              // show navbar
+              nav.classList.toggle("show");
+              // change icon
+              toggle.classList.toggle("bx-x");
+              // add padding to body
+              bodypd.classList.toggle("body-pd");
+              // add padding to header
+              headerpd.classList.toggle("body-pd");
+            });
+          }
+        };
+
+        showNavbar("header-toggle", "nav-bar", "body-pd", "header");
+
+        /*===== LINK ACTIVE =====*/
+        const linkColor = document.querySelectorAll(".nav_link");
+
+        function colorLink() {
+          if (linkColor) {
+            linkColor.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+          }
+        }
+        linkColor.forEach((l) => l.addEventListener("click", colorLink));
+
+        // Your code to run since DOM is loaded and ready
+      });
+    </script>
+
+    <!-- chart code -->
+    <script>
+      am5.ready(function () {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv1");
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([am5themes_Animated.new(root)]);
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(
+          am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+          })
+        );
+
+        // Add cursor
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+        var cursor = chart.set(
+          "cursor",
+          am5xy.XYCursor.new(root, {
+            behavior: "zoomX",
+          })
+        );
+        cursor.lineY.set("visible", false);
+
+        // Generate random data
+        var date = new Date();
+        date.setHours(0, 0, 0, 0);
+        var value = 100;
+
+        function generateData() {
+          value = Math.round(Math.random() * 10 - 5 + value);
+          am5.time.add(date, "day", 1);
+          return {
+            date: date.getTime(),
+            value: value,
+          };
+        }
+
+        function generateDatas(count) {
+          var data = [];
+          for (var i = 0; i < count; ++i) {
+            data.push(generateData());
+          }
+          return data;
+        }
+ 
+        // Create axes
+        var xAxis = chart.xAxes.push(
+          am5xy.DateAxis.new(root, {
+            groupData: true,
+            maxDeviation: 0,
+            baseInterval: {
+              timeUnit: "day",
+              count: 1,
+            },
+            renderer: am5xy.AxisRendererX.new(root, {}),
+            tooltip: am5.Tooltip.new(root, {}),
+          })
+        );
+
+        var yAxis = chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            renderer: am5xy.AxisRendererY.new(root, {}),
+          })
+        );
+
+        // Add series
+        var series = chart.series.push(
+          am5xy.LineSeries.new(root, {
+            name: "Series",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "value",
+            valueXField: "date",
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "{valueY}",
+            }),
+          })
+        );
+
+        // Add scrollbar
+        chart.set(
+          "scrollbarX",
+          am5.Scrollbar.new(root, {
+            orientation: "horizontal",
+          })
+        );
+
+        var data = generateDatas(50000);
+        series.data.setAll(data);
+
+        //
+        series.appear(1000);
+        chart.appear(1000, 100);
+      }); // end am5.ready()
+    </script>
+
+    <!-- graph1 code -->
+    <script>
+      am5.ready(function () {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv");
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([am5themes_Animated.new(root)]);
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(
+          am5xy.XYChart.new(root, {
+            panX: true,
+            panY: true,
+            wheelX: "panX",
+            wheelY: "zoomX",
+            pinchZoomX: true,
+          })
+        );
+
+        // Add cursor
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+        var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+        cursor.lineY.set("visible", false);
+
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+        var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+        xRenderer.labels.template.setAll({
+          rotation: -90,
+          centerY: am5.p50,
+          centerX: am5.p100,
+          paddingRight: 15,
+        });
+
+        var xAxis = chart.xAxes.push(
+          am5xy.CategoryAxis.new(root, {
+            maxDeviation: 0.3,
+            categoryField: "country",
+            renderer: xRenderer,
+            tooltip: am5.Tooltip.new(root, {}),
+          })
+        );
+
+        var yAxis = chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            maxDeviation: 0.3,
+            renderer: am5xy.AxisRendererY.new(root, {}),
+          })
+        );
+
+        // Create series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(
+          am5xy.ColumnSeries.new(root, {
+            name: "Series 1",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "value",
+            sequencedInterpolation: true,
+            categoryXField: "country",
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "{valueY}",
+            }),
+          })
+        );
+
+        series.columns.template.setAll({
+          cornerRadiusTL: 5,
+          cornerRadiusTR: 5,
+        });
+        series.columns.template.adapters.add("fill", function (fill, target) {
+          return chart.get("colors").getIndex(series.columns.indexOf(target));
+        });
+
+        series.columns.template.adapters.add(
+          "stroke",
+          function (stroke, target) {
+            return chart.get("colors").getIndex(series.columns.indexOf(target));
+          }
+        );
+
+        // Set data
+        var data = [
+        {
+            country: "USA",
+            value: 2025,
+          },
+          {
+            country: "China",
+            value: 1882,
+          },
+          {
+            country: "Japan",
+            value: 1809,
+          },
+          {
+            country: "Germany",
+            value: 1322,
+          },
+          {
+            country: "UK",
+            value: 1122,
+          },
+          {
+            country: "France",
+            value: 1114,
+          },
+          {
+            country: "India",
+            value: 984,
+          },
+          {
+            country: "Spain",
+            value: 711,
+          },
+          {
+            country: "Netherlands",
+            value: 665,
+          },
+          {
+            country: "South Korea",
+            value: 443,
+          },
+          {
+            country: "Canada",
+            value: 441,
+          }, 
+        ];
+
+        xAxis.data.setAll(data);
+        series.data.setAll(data);
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear(1000);
+        chart.appear(1000, 100);
+      }); // end am5.ready()
+    </script>
+
+    <!-- graph code -->
+    <script>
+      am5.ready(function () {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv2");
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([am5themes_Animated.new(root)]);
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(
+          am5xy.XYChart.new(root, {
+            panX: true,
+            panY: true,
+            wheelX: "panX",
+            wheelY: "zoomX",
+            pinchZoomX: true,
+          })
+        );
+
+        // Add cursor
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+        var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+        cursor.lineY.set("visible", false);
+
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+        var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+        xRenderer.labels.template.setAll({
+          rotation: -90,
+          centerY: am5.p50,
+          centerX: am5.p100,
+          paddingRight: 15,
+        });
+
+        var xAxis = chart.xAxes.push(
+          am5xy.CategoryAxis.new(root, {
+            maxDeviation: 0.3,
+            categoryField: "country",
+            renderer: xRenderer,
+            tooltip: am5.Tooltip.new(root, {}),
+          })
+        );
+
+        var yAxis = chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            maxDeviation: 0.3,
+            renderer: am5xy.AxisRendererY.new(root, {}),
+          })
+        );
+
+        // Create series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(
+          am5xy.ColumnSeries.new(root, {
+            name: "Series 1",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "value",
+            sequencedInterpolation: true,
+            categoryXField: "country",
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "{valueY}",
+            }),
+          })
+        );
+
+        series.columns.template.setAll({
+          cornerRadiusTL: 5,
+          cornerRadiusTR: 5,
+        });
+        series.columns.template.adapters.add("fill", function (fill, target) {
+          return chart.get("colors").getIndex(series.columns.indexOf(target));
+        });
+
+        series.columns.template.adapters.add(
+          "stroke",
+          function (stroke, target) {
+            return chart.get("colors").getIndex(series.columns.indexOf(target));
+          }
+        );
+
+        // Set data
+        var data = [
+          {
+            country: "USA",
+            value: 2025,
+          },
+          {
+            country: "China",
+            value: 1882,
+          },
+          {
+            country: "Japan",
+            value: 1809,
+          },
+          {
+            country: "Germany",
+            value: 1322,
+          },
+          {
+            country: "UK",
+            value: 1122,
+          },
+          {
+            country: "France",
+            value: 1114,
+          },
+          {
+            country: "India",
+            value: 984,
+          },
+          {
+            country: "Spain",
+            value: 711,
+          },
+          {
+            country: "Netherlands",
+            value: 665,
+          },
+          {
+            country: "South Korea",
+            value: 443,
+          },
+          {
+            country: "Canada",
+            value: 441,
+          },
+        ];
+
+        xAxis.data.setAll(data);
+        series.data.setAll(data);
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear(1000);
+        chart.appear(1000, 100);
+      }); // end am5.ready()
+    </script>
+
+    <!-- pie chart -->
+    <script>
+      am5.ready(function () {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv3");
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([am5themes_Animated.new(root)]);
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+        var chart = root.container.children.push(
+          am5percent.PieChart.new(root, {
+            endAngle: 270,
+          })
+        );
+
+        // Create series
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+        var series = chart.series.push(
+          am5percent.PieSeries.new(root, {
+            valueField: "value",
+            categoryField: "category",
+            endAngle: 270,
+          })
+        );
+
+        series.states.create("hidden", {
+          endAngle: -90,
+        });
+
+        // Set data
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+        series.data.setAll([
+          {
+            category: "Lithuania",
+            value: 501.9,
+          },
+          {
+            category: "Czechia",
+            value: 301.9,
+          },
+          {
+            category: "Ireland",
+            value: 201.1,
+          },
+          {
+            category: "Germany",
+            value: 165.8,
+          },
+          {
+            category: "Australia",
+            value: 139.9,
+          },
+          {
+            category: "Austria",
+            value: 128.3,
+          },
+          {
+            category: "UK",
+            value: 99,
+          },
+        ]);
+
+        series.appear(1000, 100);
+      }); // end am5.ready()
+    </script>
+
+    <!-- HTML -->
+    <div id="chartdiv"></div>
+    amCharts
+
+    <script>
+      am5.ready(function () {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv");
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([am5themes_Animated.new(root)]);
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(
+          am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+          })
+        );
+
+        // Add cursor
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+        var cursor = chart.set(
+          "cursor",
+          am5xy.XYCursor.new(root, {
+            behavior: "zoomX",
+          })
+        );
+        cursor.lineY.set("visible", false);
+
+        var date = new Date();
+        date.setHours(0, 0, 0, 0);
+        var value = 100;
+
+        function generateData() {
+          value = Math.round(Math.random() * 10 - 5 + value);
+          am5.time.add(date, "day", 1);
+          return {
+            date: date.getTime(),
+            value: value,
+          };
+        }
+
+        function generateDatas(count) {
+          var data = [];
+          for (var i = 0; i < count; ++i) {
+            data.push(generateData());
+          }
+          return data;
+        }
+
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+        var xAxis = chart.xAxes.push(
+          am5xy.DateAxis.new(root, {
+            maxDeviation: 0,
+            baseInterval: {
+              timeUnit: "day",
+              count: 1,
+            },
+            renderer: am5xy.AxisRendererX.new(root, {}),
+            tooltip: am5.Tooltip.new(root, {}),
+          })
+        );
+
+        var yAxis = chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            renderer: am5xy.AxisRendererY.new(root, {}),
+          })
+        );
+
+        // Add series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(
+          am5xy.ColumnSeries.new(root, {
+            name: "Series",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "value",
+            valueXField: "date",
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "{valueY}",
+            }),
+          })
+        );
+
+        // Add scrollbar
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+        chart.set(
+          "scrollbarX",
+          am5.Scrollbar.new(root, {
+            orientation: "horizontal",
+          })
+        );
+
+        var data = generateDatas(50);
+        series.data.setAll(data);
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear(1000);
+        chart.appear(1000, 100);
+      }); // end am5.ready()
+    </script>
+
+    <!-- last graph -->
+    <script>
+      am5.ready(function () {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv4");
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([am5themes_Animated.new(root)]);
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(
+          am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+          })
+        );
+
+        // Add cursor
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+        var cursor = chart.set(
+          "cursor",
+          am5xy.XYCursor.new(root, {
+            behavior: "zoomX",
+          })
+        );
+        cursor.lineY.set("visible", false);
+
+        var date = new Date();
+        date.setHours(0, 0, 0, 0);
+        var value = 100;
+
+        function generateData() {
+          value = Math.round(Math.random() * 10 - 5 + value);
+          am5.time.add(date, "day", 1);
+          return {
+            date: date.getTime(),
+            value: value,
+          };
+        }
+
+        function generateDatas(count) {
+          var data = [];
+          for (var i = 0; i < count; ++i) {
+            data.push(generateData());
+          }
+          return data;
+        }
+
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+        var xAxis = chart.xAxes.push(
+          am5xy.DateAxis.new(root, {
+            maxDeviation: 0,
+            baseInterval: {
+              timeUnit: "day",
+              count: 1,
+            },
+            renderer: am5xy.AxisRendererX.new(root, {}),
+            tooltip: am5.Tooltip.new(root, {}),
+          })
+        );
+
+        var yAxis = chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            renderer: am5xy.AxisRendererY.new(root, {}),
+          })
+        );
+
+        // Add series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(
+          am5xy.ColumnSeries.new(root, {
+            name: "Series",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "value",
+            valueXField: "date",
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "{valueY}",
+            }),
+          })
+        );
+
+        // Add scrollbar
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+        chart.set(
+          "scrollbarX",
+          am5.Scrollbar.new(root, {
+            orientation: "horizontal",
+          })
+        );
+
+        var data = generateDatas(50);
+        series.data.setAll(data);
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear(1000);
+        chart.appear(1000, 100);
+      }); // end am5.ready()
+    </script>
+
+    <script>
+        am5.ready(function() {
+        
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv");
+        
+        
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        
+        
+        // Generate random data
+        var value = 100;
+        
+        function generateChartData() {
+          var chartData = [];
+          var firstDate = new Date();
+          firstDate.setDate(firstDate.getDate() - 1000);
+          firstDate.setHours(0, 0, 0, 0);
+        
+          for (var i = 0; i < 16; i++) {
+            var newDate = new Date(firstDate);
+            newDate.setDate(newDate.getDate() + i);
+        
+            value += (Math.random() < 0.5 ? 1 : -1) * Math.random() * 10;
+        
+            chartData.push({
+              date: newDate.getTime(),
+              value: value
+            });
+          }
+          return chartData;
+        }
+        
+        var data = generateChartData();
+        
+        
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          focusable: true,
+          panX: true,
+          panY: true,
+          wheelX: "panX",
+          wheelY: "zoomX"
+        }));
+        
+        var easing = am5.ease.linear;
+        
+        
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+        var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+          maxDeviation: 0.5,
+          extraMin:-0.1,
+          extraMax:0.1,
+          groupData: false,
+          baseInterval: {
+            timeUnit: "day",
+            count: 1
+          },
+          renderer: am5xy.AxisRendererX.new(root, {
+            minGridDistance: 50
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        
+        // Add series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(am5xy.LineSeries.new(root, {
+          minBulletDistance: 10,
+          name: "Series 1",
+          xAxis: xAxis,
+          yAxis: yAxis,
+          valueYField: "value",
+          valueXField: "date",
+          tooltip: am5.Tooltip.new(root, {
+            pointerOrientation: "horizontal",
+            labelText: "{valueY}"
+          })
+        }));
+        series.data.setAll(data);
+        
+        series.bullets.push(function () {
+          return am5.Bullet.new(root, {
+            locationX:undefined,
+            sprite: am5.Circle.new(root, {
+              radius: 4,
+              fill: series.get("fill")
+            })
+          })
+        });
+        
+        
+        // Add cursor
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+        var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+          xAxis: xAxis
+        }));
+        cursor.lineY.set("visible", false);
+        
+        
+        // Update data every second
+        setInterval(function () {
+          addData();
+        }, 1000)
+        
+        
+        function addData() {
+          var lastDataItem = series.dataItems[series.dataItems.length - 1];
+          var lastValue = lastDataItem.get("valueY");
+          var newValue = value + ((Math.random() < 0.5 ? 1 : -1) * Math.random() * 6);
+          var lastDate = new Date(lastDataItem.get("valueX"));
+          var time = am5.time.add(new Date(lastDate), "day", 1).getTime();
+          series.data.removeIndex(0);
+          series.data.push({
+            date: time,
+            value: newValue
+          })
+        
+          var newDataItem = series.dataItems[series.dataItems.length - 1];
+          newDataItem.animate({
+            key: "valueYWorking",
+            to: newValue,
+            from: lastValue,
+            duration: 600,
+            easing: easing
+          });
+        
+          var animation = newDataItem.animate({
+            key: "locationX",
+            to: 0.5,
+            from: -0.5,
+            duration: 600
+          });
+          if (animation) {
+            var tooltip = xAxis.get("tooltip");
+            if (tooltip && !tooltip.isHidden()) {
+              animation.events.on("stopped", function () {
+                xAxis.updateTooltip();
+              })
+            }
+          }
+        }
+        
+        
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        chart.appear(1000, 100);
+        
+        }); // end am5.ready()
+        </script>
+        
+        <!-- HTML -->
+        <div id="chartdiv"></div>
+  </body>
+</html>
