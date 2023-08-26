@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "../code"
+		},
+		{
+			"path": "../css"
+		},
+		{
+			"path": "../data"
+		},
+		{
+			"path": "../deps"
+		},
+		{
+			"path": "../font"
+		},
+		{
+			"path": "../img"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../json-files"
+		},
+		{
+			"path": "../leaflet"
+		},
+		{
+			"path": "../TRASH CODE"
+		}
+	]
+}

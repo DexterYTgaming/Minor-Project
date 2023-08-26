@@ -1,0 +1,11 @@
+#map {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+.a .h2{
+    position: relative;
+    top: 0;
+    left: 0;
+}
